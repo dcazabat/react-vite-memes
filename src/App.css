@@ -1,0 +1,46 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.marco {
+  margin-top: 5rem;
+  max-width: 600px;
+  border: solid 3px black;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+}
+
+.img-meme {
+  width: 90%;
+  border: solid 2px black;
+  border-radius: 1em;
+  aspect-ratio: 1/1;
+}
+
+.text {
+  /* font-size: 20px; */
+  color: white;
+  text-shadow: 2px 2px 2px black;
+}
+
+.text-up {
+  position: relative;
+  left: 2.5em;
+  top:10em;
+}
+
+.text-down {
+  position: relative;
+  left: 2.5em;
+  top:10em;
+}
+
+#fontSize {
+  margin-top: 1em;
+  padding: 1em;
+  background-color: white;
+  border-radius: 10px;
+}
