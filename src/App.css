@@ -2,20 +2,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .marco {
-  margin-top: 5rem;
-  max-width: 600px;
-  border: solid 3px black;
+  margin: 1rem 1rem 0 1rem;
+  max-width: auto;
+  border: solid 3px rgb(255, 255, 255);
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(222, 222, 222, 0.7);
   padding: 20px;
 }
 
-.img-meme {
-  width: 90%;
-  border: solid 2px black;
+.card-img {
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+  border: solid 2px rgb(255, 255, 255);
   border-radius: 1em;
   aspect-ratio: 1/1;
 }
@@ -28,14 +31,14 @@
 
 .text-up {
   position: relative;
-  left: 2.5em;
-  top:10em;
+  left: 1em;
+  top: 3em;
 }
 
 .text-down {
   position: relative;
-  left: 2.5em;
-  top:10em;
+  left: -3em;
+  top: 16em;
 }
 
 #fontSize {
@@ -43,4 +46,90 @@
   padding: 1em;
   background-color: white;
   border-radius: 10px;
+}
+
+.col-heigth {
+  padding: 1em;
+  height: 50%;
+}
+
+/* Extra small devices (phones, 540px and down) */
+@media only screen and (max-width: 540px) {
+
+  .text-up {
+    position: relative;
+    left: 1em;
+    top: 1em;
+  }
+
+  .text-down {
+    position: relative;
+    left: -3em;
+    top: 11em;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+  .text-up {
+    position: relative;
+    left: 1em;
+    top: 1em;
+  }
+
+  .text-down {
+    position: relative;
+    left: -3em;
+    top: 12em;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+  .text-up {
+    position: relative;
+    left: 1em;
+    top: 2em;
+  }
+
+  .text-down {
+    position: relative;
+    left: -3em;
+    top: 17em;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+  .text-up {
+    position: relative;
+    left: 1em;
+    top: 2em;
+  }
+
+  .text-down {
+    position: relative;
+    left: -3em;
+    top: 22em;
+  }
+}
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1320px) {
+
+  .text-up {
+    position: relative;
+    left: 1em;
+    top: 2em;
+  }
+
+  .text-down {
+    position: relative;
+    left: -3em;
+    top: 26em;
+  }
 }

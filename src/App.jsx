@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import html2canvas from 'html2canvas';
 import Swal from 'sweetalert2';
@@ -12,11 +12,11 @@ function App() {
   const [fontsize, setFontSize] = useState(20);
   const [fontfamily, setFontFamily] = useState("'Segoe UI', Tahoma, Geneva, Verdana, sans-serif");
 
-  const fontFamilys = [{name:'Courier New', font:"'Courier New', Courier, monospace"},
-    {name:'Franklin Gothic Medium', font:"'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"},
-    {name:'Gill Sans', font:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"},
-    {name:'Lucida Sans', font:"'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif"},
-    {name:'Segoe UI', font: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}]
+  const fontFamilys = [{ name: 'Courier New', font: "'Courier New', Courier, monospace" },
+  { name: 'Franklin Gothic Medium', font: "'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" },
+  { name: 'Gill Sans', font: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" },
+  { name: 'Lucida Sans', font: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" },
+  { name: 'Segoe UI', font: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }]
 
   // Funcion para ordenar alfabetico por nombre de meme
   function compare(a, b) {
@@ -37,15 +37,12 @@ function App() {
       const resp = await fetch(url)
       const json = await resp.json()
       const array_memes = json.data.memes.sort(compare)
+      // Agregar control de errores
       setData(array_memes)
       setImage(array_memes[0].url)
     }
 
     fetchData();
-  }, [])
-
-  useEffect(() => {
-    console.log(fontsize);
   }, [])
 
   const onChangeLinea1 = function (e) {
@@ -60,7 +57,7 @@ function App() {
     setImage(e.target.value)
   }
 
-  const onChangeFont = function(e) {
+  const onChangeFont = function (e) {
     setFontFamily(e.target.value)
   }
 
@@ -73,7 +70,7 @@ function App() {
       title: 'Quieres Guardar el Meme ???',
       showDenyButton: true,
       showCancelButton: true,
-      imageUrl: "https://unsplash.it/400/200",
+      imageUrl: "https://picsum.photos/id/63/400/200",
       imageWidth: 400,
       imageHeight: 200,
       imageAlt: 'Custom image',
@@ -114,20 +111,29 @@ function App() {
 
 
   return (
-    <div className="">
+    <div className="container">
       <div className='marco'>
         <div className='text-center'>
           <h1 className='display-3 p-3'>Editor de Memes</h1>
         </div>
         <div className='row'>
-          <div className="col-6">
+          <div className="col-md-6 col-xs-12">
             <div className="mt-3" id="pictmeme">
-              <span className='text text-up' style={{ fontSize: `${fontsize}px`, fontFamily: `${fontfamily}` }} >{linea1}</span>
-              <span className='text text-down' style={{ fontSize: `${fontsize}px`, fontFamily: `${fontfamily}` }} >{linea2}</span>
-              <img className='img-meme' src={image} />
+              <div className='card-img container text-center' src={image} style={{ backgroundImage: `url(${image})` }} >
+                <div className="row align-items-start col-heigth">
+                  <div className="col">
+                    <span className='text' style={{ fontSize: `${fontsize}px`, fontFamily: `${fontfamily}` }} >{linea2}</span>
+                  </div>
+                </div>
+                <div className="row align-items-end col-heigth">
+                  <div className="col">
+                    <span className='text' style={{ fontSize: `${fontsize}px`, fontFamily: `${fontfamily}` }} >{linea1}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="col-6  text-center">
+          <div className="col-md-6 col-xs-12 text-center">
             <div className="form-floating m-3">
               <select className="form-select" id="floatingSelect" aria-label="Floating label select example" onChange={onChangeImagen} >
                 {viewData}
