@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import html2canvas from 'html2canvas';
+// import html2canvas from 'html2canvas';
 import Swal from 'sweetalert2';
+import * as htmlToImage from 'html-to-image';
 
 function App() {
   const [linea1, setLinea1] = useState('Superior');
@@ -9,14 +10,15 @@ function App() {
   const [image, setImage] = useState('');
   const [data, setData] = useState([]);
   const [fontsize, setFontSize] = useState(20);
-  const [fontfamily, setFontFamily] = useState("'Segoe UI', Tahoma, Geneva, Verdana, sans-serif");
+  const [fontfamily, setFontFamily] = useState("Inter, Avenir, Helvetica, Arial, sans-serif");
 
   const fontFamilys = [
+    { name: 'Inter Averi', font: 'Inter, Avenir, Helvetica, Arial, sans-serif;'},
     { name: 'Courier New', font: "'Courier New', Courier, monospace" },
     { name: 'Franklin Gothic Medium', font: "'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" },
     { name: 'Gill Sans', font: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" },
     { name: 'Lucida Sans', font: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" },
-    { name: 'Segoe UI', font: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }
+    { name: 'Segoe UI', font: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }    
   ]
 
   // Funcion para ordenar alfabetico por nombre de meme
@@ -91,13 +93,21 @@ function App() {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        html2canvas(document.querySelector("#pictmeme")).then(canvas => {
-          const img = canvas.toDataURL("image/png", 1.0);
-          const link = document.createElement('a');
-          link.download = "meme.jpg";
-          link.href = img;
-          link.click();
-        });
+        // CON HTML2CANVAS me queda imagen en Blanco
+        // html2canvas(document.querySelector("#pictmeme")).then(canvas => {
+        //   const img = canvas.toDataURL("image/png", 1.0);
+        //   const link = document.createElement('a');
+        //   link.download = "meme.jpg";
+        //   link.href = img;
+        //   link.click();
+        // });
+        htmlToImage.toPng(document.getElementById('pictmeme'))
+          .then(function (dataUrl) {
+            const link = document.createElement('a');
+            link.download = "meme.jpg";
+            link.href = dataUrl;
+            link.click();
+          });
         Swal.fire('SI SI, GUARDADO !!!', '', 'success')
       } else if (result.isDenied) {
         Swal.fire('OH NO, PORQUE !!!???', '', 'info')
@@ -105,7 +115,6 @@ function App() {
     })
 
   }
-
 
   // Funciones que retorna un map del array de datos
   const viewData = data.map((item, index) => {
@@ -131,17 +140,15 @@ function App() {
         </div>
         <div className='row'>
           <div className="col-md-6 col-xs-12">
-            <div className="mt-3" id="pictmeme">
-              <div className='card-img container text-center' style={{ backgroundImage: `url(${image})` }} >
-                <div className="row align-items-start col-heigth">
-                  <div className="col">
-                    <span className='text' style={{ fontSize: `${fontsize}px`, fontFamily: `${fontfamily}` }} >{linea1}</span>
-                  </div>
+            <div className='card-img container text-center' id="pictmeme" style={{ backgroundImage: `url(${image})` }} >
+              <div className="row align-items-start col-heigth">
+                <div className="col">
+                  <span className='text' style={{ fontSize: `${fontsize}px`, fontFamily: `${fontfamily}` }} >{linea1}</span>
                 </div>
-                <div className="row align-items-end col-heigth">
-                  <div className="col">
-                    <span className='text' style={{ fontSize: `${fontsize}px`, fontFamily: `${fontfamily}` }} >{linea2}</span>
-                  </div>
+              </div>
+              <div className="row align-items-end col-heigth">
+                <div className="col">
+                  <span className='text' style={{ fontSize: `${fontsize}px`, fontFamily: `${fontfamily}` }} >{linea2}</span>
                 </div>
               </div>
             </div>
