@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import html2canvas from 'html2canvas';
 import Swal from 'sweetalert2';
-// import { motion } from "framer-motion";
 
 function App() {
   const [linea1, setLinea1] = useState('Superior');
@@ -12,11 +11,13 @@ function App() {
   const [fontsize, setFontSize] = useState(20);
   const [fontfamily, setFontFamily] = useState("'Segoe UI', Tahoma, Geneva, Verdana, sans-serif");
 
-  const fontFamilys = [{ name: 'Courier New', font: "'Courier New', Courier, monospace" },
-  { name: 'Franklin Gothic Medium', font: "'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" },
-  { name: 'Gill Sans', font: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" },
-  { name: 'Lucida Sans', font: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" },
-  { name: 'Segoe UI', font: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }]
+  const fontFamilys = [
+    { name: 'Courier New', font: "'Courier New', Courier, monospace" },
+    { name: 'Franklin Gothic Medium', font: "'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" },
+    { name: 'Gill Sans', font: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" },
+    { name: 'Lucida Sans', font: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" },
+    { name: 'Segoe UI', font: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }
+  ]
 
   // Funcion para ordenar alfabetico por nombre de meme
   function compare(a, b) {
@@ -45,6 +46,8 @@ function App() {
     fetchData();
   }, [])
 
+  // Eventos cuando se cambian los valores de las lineas si queda vacia
+  // se vuelven al estado inicial
   useEffect(() => {
     if (!linea1) {
       setLinea1('Superior')
@@ -57,6 +60,8 @@ function App() {
     }
   }, [linea2])
 
+
+  // Funciones que manejan los estado cuando cambian los valores
   const onChangeLinea1 = function (e) {
     setLinea1(e.target.value)
   }
