@@ -45,6 +45,18 @@ function App() {
     fetchData();
   }, [])
 
+  useEffect(() => {
+    if (!linea1) {
+      setLinea1('Superior')
+    }
+  }, [linea1])
+
+  useEffect(() => {
+    if (!linea2) {
+      setLinea2('Inferior')
+    }
+  }, [linea2])
+
   const onChangeLinea1 = function (e) {
     setLinea1(e.target.value)
   }
@@ -62,14 +74,9 @@ function App() {
   }
 
   const onClickExportar = function (e) {
-    let img = ''
-    html2canvas(document.querySelector("#pictmeme")).then(canvas => {
-      img = canvas.toDataURL("image/png")
-    })
     Swal.fire({
       title: 'Quieres Guardar el Meme ???',
       showDenyButton: true,
-      showCancelButton: true,
       imageUrl: "https://picsum.photos/id/63/400/200",
       imageWidth: 400,
       imageHeight: 200,
@@ -80,8 +87,8 @@ function App() {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         html2canvas(document.querySelector("#pictmeme")).then(canvas => {
-          img = canvas.toDataURL("image/png");
-          let link = document.createElement('a');
+          const img = canvas.toDataURL("image/png", 1.0);
+          const link = document.createElement('a');
           link.download = "meme.jpg";
           link.href = img;
           link.click();
@@ -94,7 +101,8 @@ function App() {
 
   }
 
-  // Funcion que retorna un map del array de datos
+
+  // Funciones que retorna un map del array de datos
   const viewData = data.map((item, index) => {
     return (
       <option key={index} value={item.url}>{item.name}</option>
@@ -114,20 +122,20 @@ function App() {
     <div className="container">
       <div className='marco'>
         <div className='text-center'>
-          <h1 className='display-3 p-3'>Editor de Memes</h1>
+          <span className='display-3 p-3'>Editor de Memes</span>
         </div>
         <div className='row'>
           <div className="col-md-6 col-xs-12">
             <div className="mt-3" id="pictmeme">
-              <div className='card-img container text-center' src={image} style={{ backgroundImage: `url(${image})` }} >
+              <div className='card-img container text-center' style={{ backgroundImage: `url(${image})` }} >
                 <div className="row align-items-start col-heigth">
                   <div className="col">
-                    <span className='text' style={{ fontSize: `${fontsize}px`, fontFamily: `${fontfamily}` }} >{linea2}</span>
+                    <span className='text' style={{ fontSize: `${fontsize}px`, fontFamily: `${fontfamily}` }} >{linea1}</span>
                   </div>
                 </div>
                 <div className="row align-items-end col-heigth">
                   <div className="col">
-                    <span className='text' style={{ fontSize: `${fontsize}px`, fontFamily: `${fontfamily}` }} >{linea1}</span>
+                    <span className='text' style={{ fontSize: `${fontsize}px`, fontFamily: `${fontfamily}` }} >{linea2}</span>
                   </div>
                 </div>
               </div>
@@ -142,11 +150,11 @@ function App() {
             </div>
             <div className="input-group">
               <span className="input-group-text">Linea Superior</span>
-              <input className="form-control" onChange={onChangeLinea2} type="text" placeholder="Tu Texto" />
+              <input className="form-control" onChange={onChangeLinea1} type="text" placeholder="Tu Texto" />
             </div>
             <div className="input-group mt-3">
               <span className="input-group-text">Linea Inferior</span>
-              <input className="form-control" onChange={onChangeLinea1} type="text" placeholder="Tu Texto" />
+              <input className="form-control" onChange={onChangeLinea2} type="text" placeholder="Tu Texto" />
             </div>
             <div id="fontSize">
               <label htmlFor="customRange1" className="form-label">Tamaño de la Fuente</label>
