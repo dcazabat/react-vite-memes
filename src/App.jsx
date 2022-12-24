@@ -89,7 +89,7 @@ function App() {
       imageHeight: 200,
       imageAlt: 'Custom image',
       confirmButtonText: 'Guardar',
-      denyButtonText: `No Guartdar`,
+      denyButtonText: `No Guardar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -104,11 +104,10 @@ function App() {
         htmlToImage.toPng(document.getElementById('pictmeme'))
           .then(function (dataUrl) {
             const link = document.createElement('a');
-            link.download = "meme.jpg";
+            link.download = "meme.png";
             link.href = dataUrl;
             link.click();
           });
-        Swal.fire('SI SI, GUARDADO !!!', '', 'success')
       } else if (result.isDenied) {
         Swal.fire('OH NO, PORQUE !!!???', '', 'info')
       }
